@@ -1,0 +1,30 @@
+{
+    "name": "node_amqp",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start:producer": "node producer.js",
+        "start:consumer": "node consumer.js",
+        "dev:producer": "nodemon producer.js",
+        "test": "jest --config ./jest.config.json",
+        "test:watch": "npm run test -- --watch",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "docker:build": "",
+        "docker:start": ""
+    },
+    "keywords": [],
+    "author": "Arkadiusz Chybiński",
+    "dependencies": {
+        "amqplib": "^0.5.5",
+        "awilix": "^4.2.5",
+        "dotenv": "^8.2.0",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "eslint": "^6.8.0",
+        "eslint-config-google": "^0.14.0",
+        "jest": "^25.3.0",
+        "nodemon": "^2.0.3"
+    }
+}
