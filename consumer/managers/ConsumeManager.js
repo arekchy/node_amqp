@@ -16,8 +16,12 @@ class ConsumeManager {
    * ConsumeManager constructor
    * @param {QueueConsumerService} queueConsumerService - simple queue messages listener
    */
-  constructor({queueConsumerService}) {
+  constructor({
+    logWriterService,
+    queueConsumerService,
+  }) {
     this.queueConsumerService = queueConsumerService;
+    this.logWriterService = logWriterService;
   }
 
   /**
@@ -28,7 +32,6 @@ class ConsumeManager {
       this.logMessage(msg);
     });
     this.queueConsumerService.startConsuming();
-
   }
 
 
@@ -38,6 +41,7 @@ class ConsumeManager {
    */
   logMessage(msg) {
     console.log(msg.content);
+    this.logWriterService.logToFile(msg);
   }
 }
 

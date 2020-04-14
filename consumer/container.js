@@ -6,6 +6,7 @@ const QueueManager = require('../managers/QueueManager');
 const ConsumerApp = require('./ConsumerApp');
 const ConsumeManager = require('./managers/ConsumeManager');
 const QueueConsumerService = require('./services/QueueConsumerService');
+const LogWriterService = require('./services/LogWriterService');
 
 const setupContainer = () => {
   const container = awilix.createContainer();
@@ -24,6 +25,7 @@ const setupContainer = () => {
 
   // SERVICES
   container.register({
+    logWriterService: awilix.asClass(LogWriterService).singleton(),
     queueConsumerService: awilix.asFunction(({queueManager}) => {
       return new QueueConsumerService({
         queueManager,

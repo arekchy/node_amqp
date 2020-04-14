@@ -1,6 +1,5 @@
 const EventEmitter = require('events');
 const ExchangePublisherService = require('./ExchangePublisherService');
-const QueueManagerEvent = require('../../structures/QueueManagerEvent');
 
 describe('ExchangePublisherService', () => {
   const exchangeName = 'ExName';

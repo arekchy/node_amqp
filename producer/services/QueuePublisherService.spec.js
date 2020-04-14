@@ -1,6 +1,5 @@
 const EventEmitter = require('events');
 const QueuePublisherService = require('./QueuePublisherService');
-const QueueManagerEvent = require('../../structures/QueueManagerEvent');
 
 describe('QueuePublisherService', () => {
   const queueName = 'queue-name';

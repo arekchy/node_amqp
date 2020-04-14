@@ -2,6 +2,9 @@ const QueueManagerEvent = require('../../structures/QueueManagerEvent');
 const ConsumerServiceEvent = require('../structures/ConsumerServiceEvent');
 const EventEmitter = require('events');
 
+/**
+ * Consumes messages from simple queue
+ */
 class QueueConsumerService extends EventEmitter {
   /**
    * QueueConsumerService constructor
