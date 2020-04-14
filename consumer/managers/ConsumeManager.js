@@ -27,8 +27,8 @@ class ConsumeManager {
     this.queueConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
       this.logMessage(msg);
     });
-
     this.queueConsumerService.startConsuming();
+
   }
 
 

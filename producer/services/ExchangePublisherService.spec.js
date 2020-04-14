@@ -12,33 +12,33 @@ describe('ExchangePublisherService', () => {
   };
 
   let service;
-  beforeEach(() => {
+  beforeEach(async () => {
     service = new ExchangePublisherService({
       queueManager, exchangeName, exchangeType,
     });
   });
 
-  it('whent not initialized, should not call publish method', () => {
+  it('whent not initialized, should not call publish method', async () => {
     const input = {
       msg: 'Test',
       type: 'direct',
       target: 'direct-target',
     };
 
-    service.publish(input);
+    await service.publish(input);
 
     expect(queueManager.channel.publish).not.toBeCalled();
   });
 
-  it('whent initialized, should not call publish method', () => {
+  it('whent initialized, should call publish method', async () => {
     const input = {
       msg: 'Test',
       type: 'direct',
       target: 'direct-target',
     };
-    queueManager.emit(QueueManagerEvent.CHANNEL_CREATED_EVENT);
+    await service.init();
 
-    service.publish(input);
+    await service.publish(input);
 
     expect(queueManager.channel.assertExchange).toHaveBeenCalledWith(exchangeName, exchangeType, {
       durable: false,

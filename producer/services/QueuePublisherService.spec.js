@@ -26,14 +26,14 @@ describe('QueuePublisherService', () => {
     expect(queueManager.channel.sendToQueue).not.toBeCalled();
   });
 
-  it('whent initialized, should not call publish method', () => {
+  it('whent initialized, should not call publish method', async () => {
     const input = {
       msg: 'Test',
       type: 'queue',
     };
-    queueManager.emit(QueueManagerEvent.CHANNEL_CREATED_EVENT);
+    await service.init();
 
-    service.publish(input);
+    await service.publish(input);
 
     expect(queueManager.channel.assertQueue).toHaveBeenCalledWith(queueName, {
       durable: false,

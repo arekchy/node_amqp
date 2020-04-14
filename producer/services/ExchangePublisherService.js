@@ -13,8 +13,8 @@ class ExchangePublisherService {
   constructor({queueManager, exchangeName, exchangeType}) {
     this.connected = false;
     this.queueManager = queueManager;
-    this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT, () => {
-      this.init();
+    this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT, async () => {
+      await this.init();
     });
 
     this.exchangeName = exchangeName;
@@ -24,9 +24,9 @@ class ExchangePublisherService {
   /**
    * Prepare service before use
    */
-  init() {
+  async init() {
     this.channel = this.queueManager.channel;
-    this.channel.assertExchange(this.exchangeName, this.exchangeType, {
+    await this.channel.assertExchange(this.exchangeName, this.exchangeType, {
       durable: false,
     });
     this.connected = true;
@@ -36,12 +36,12 @@ class ExchangePublisherService {
    * Publishes message to AMQP
    * @param {Message} message
    */
-  publish(message) {
+  async publish(message) {
     if (!this.connected || !this.channel) {
       // TODO keep msgs locally until connected
       return;
     }
-    this.channel.publish(this.exchangeName, message.target || '', Buffer.from(message.msg));
+    await this.channel.publish(this.exchangeName, message.target || '', Buffer.from(message.msg));
   }
 }
 

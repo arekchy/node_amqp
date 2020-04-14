@@ -13,17 +13,17 @@ class QueuePublisherService {
     this.connected = false;
     this.queueManager = queueManager;
     this.queueName = queueName;
-    this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT, () => {
-      this.init();
+    this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT, async () => {
+      await this.init();
     });
   }
 
   /**
      * Prepare service before use
      */
-  init() {
+  async init() {
     this.channel = this.queueManager.channel;
-    this.channel.assertQueue(this.queueName, {
+    await this.channel.assertQueue(this.queueName, {
       durable: false,
     });
     this.connected = true;
@@ -33,12 +33,12 @@ class QueuePublisherService {
      * Publishes message to AMQP
      * @param {Message} message
      */
-  publish(message) {
+  async publish(message) {
     if (!this.connected || !this.channel) {
       // TODO keep msgs locally until connected
       return;
     }
-    this.channel.sendToQueue(this.queueName, Buffer.from(message.msg));
+    await this.channel.sendToQueue(this.queueName, Buffer.from(message.msg));
   }
 }
 
