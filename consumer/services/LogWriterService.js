@@ -9,7 +9,9 @@ class LogWriterService {
    * Creates writable stream to log file
    */
   constructor() {
-    this.wstream = fs.createWriteStream('consumer.log');
+    this.wstream = fs.createWriteStream('consumer.log', {
+      flags: 'a',
+    });
   }
 
   /**
