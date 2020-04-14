@@ -12,4 +12,4 @@ npm run docker:build
 npm run docker:start
 ```
 
-Log file should be created in project dir, called `consumer.log`
+Log file should be created in logs dir, called `consumer.log`

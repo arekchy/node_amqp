@@ -1,4 +1,5 @@
 const logger = require('winston');
+const QueueManagerEvent = require('../structures/QueueManagerEvent');
 
 /**
  * ConsumerApp - Consumer index file
@@ -19,8 +20,10 @@ class ConsumerApp {
      */
   async start() {
     try {
+      this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT,  async () => {
+        await this.consumeManager.startConsuming();
+      });
       await this.queueManager.connect();
-      await this.consumeManager.startConsuming();
     } catch (e) {
       process.exit(1);
     }

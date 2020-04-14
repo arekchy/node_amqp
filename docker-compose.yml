@@ -27,6 +27,7 @@ services:
       - env/consumer.env
     volumes:
       - "./app:/usr/app/app"
+      - "./logs:/usr/app/logs"
     depends_on:
       - amqp
     command: npm run start:consumer

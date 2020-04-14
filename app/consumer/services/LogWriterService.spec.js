@@ -9,7 +9,7 @@ describe('LogWriterService', () => {
   });
 
   it('should create writable stream', () => {
-    expect(fs.createWriteStream).toBeCalledWith('consumer.log', {flags: 'a'});
+    expect(fs.createWriteStream).toBeCalledWith('logs/consumer.log', {flags: 'a'});
   });
 
   describe('logToFile', () => {

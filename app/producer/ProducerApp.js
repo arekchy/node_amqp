@@ -1,4 +1,5 @@
 const logger = require('winston');
+const QueueManagerEvent = require('../structures/QueueManagerEvent');
 
 /**
  * ProducerApp - Producer index file
@@ -19,8 +20,10 @@ class ProducerApp {
      */
   async start() {
     try {
+      this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT,  async () => {
+        await this.publishManager.startPublishing();
+      });
       await this.queueManager.connect();
-      await this.publishManager.startPublishing();
     } catch (e) {
       process.exit(1);
     }
