@@ -16,9 +16,6 @@ class QueueConsumerService extends EventEmitter {
 
     this.queueManager = queueManager;
     this.queueName = queueName;
-    this.queueManager.on(QueueManagerEvent.CHANNEL_CREATED_EVENT, async () => {
-      await this.init();
-    });
   }
 
   /**

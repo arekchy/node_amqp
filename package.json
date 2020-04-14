@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start:producer": "node producer.js",
-        "start:consumer": "node consumer.js",
+        "start:producer": "forever --minUptime 200 --spinSleepTime 5000 producer.js",
+        "start:consumer": "forever --minUptime 200 --spinSleepTime 5000 consumer.js",
         "dev:producer": "nodemon producer.js",
         "dev:consumer": "nodemon consumer.js",
         "test": "jest --config ./jest.config.json",
@@ -20,6 +20,7 @@
         "amqplib": "^0.5.5",
         "awilix": "^4.2.5",
         "dotenv": "^8.2.0",
+        "forever": "^2.0.0",
         "winston": "^3.2.1"
     },
     "devDependencies": {

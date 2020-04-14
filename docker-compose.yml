@@ -17,4 +17,16 @@ services:
       - ".:/usr/app/"
     depends_on:
       - amqp
-    command: node producer.js
+    command: npm run start:producer
+
+  consumer:
+    build:
+      dockerfile: ./docker/consumer.Dockerfile
+      context: .
+    env_file:
+      - env/consumer.env
+    volumes:
+      - ".:/usr/app/"
+    depends_on:
+      - amqp
+    command: npm run start:consumer

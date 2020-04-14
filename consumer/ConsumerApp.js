@@ -18,8 +18,12 @@ class ConsumerApp {
      * @return {Promise<void>}
      */
   async start() {
-    await this.queueManager.connect();
-    await this.consumeManager.startConsuming();
+    try {
+      await this.queueManager.connect();
+      await this.consumeManager.startConsuming();
+    } catch(e) {
+      process.exit(1);
+    }
     logger.info('Consumer started');
   }
 }

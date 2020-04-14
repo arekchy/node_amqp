@@ -39,6 +39,7 @@ class ConsumeManager {
     this.queueConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
       this.logMessage(msg);
     });
+    await this.queueConsumerService.init();
     this.queueConsumerService.startConsuming();
 
     this.fanoutConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {

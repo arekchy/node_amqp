@@ -12,10 +12,4 @@ npm run docker:build
 npm run docker:start
 ```
 
-## Usage
-
-Change envs
-```dosini
-AMQP_CONNECTION_STRING=amqp://localhost:5672
-MSG_FREQUENCY=1
-```
+Log file should be created in project dir, called `consumer.log`

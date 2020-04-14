@@ -18,10 +18,14 @@ class ProducerApp {
      * @return {Promise<void>}
      */
   async start() {
-    await this.queueManager.connect();
+    try {
+      await this.queueManager.connect();
+      await this.publishManager.startPublishing();
+    } catch(e) {
+      process.exit(1);
+    }
 
     logger.info('Producer started');
-    await this.publishManager.startPublishing();
   }
 }
 

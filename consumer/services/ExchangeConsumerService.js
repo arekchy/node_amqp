@@ -17,13 +17,13 @@ class ExchangeConsumerService extends EventEmitter {
     this.exchangeName = exchangeName;
     this.exchangeType = exchangeType;
     this.routingKey = routingKey || '';
-    this.channel = this.queueManager.channel;
   }
 
   /**
    * Prepare service before use
    */
   async init() {
+    this.channel = this.queueManager.channel;
     await this.channel.assertExchange(this.exchangeName, this.exchangeType, {
       durable: false,
     });
