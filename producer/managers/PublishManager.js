@@ -15,13 +15,13 @@ class PublishManager {
    * @param {ExchangePublisherService} topicPublisherService - responsible for publishing messages to topic exchange
    */
   constructor({
-                messageGeneratorService,
-                messageFrequency,
-                queuePublisherService,
-                fanoutPublisherService,
-                directPublisherService,
-                topicPublisherService,
-              }) {
+    messageGeneratorService,
+    messageFrequency,
+    queuePublisherService,
+    fanoutPublisherService,
+    directPublisherService,
+    topicPublisherService,
+  }) {
     this.messageGeneratorService = messageGeneratorService;
     this.interval = this.calculateIntervalForFrequency(messageFrequency);
 

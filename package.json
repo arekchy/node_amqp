@@ -6,6 +6,7 @@
         "start:producer": "node producer.js",
         "start:consumer": "node consumer.js",
         "dev:producer": "nodemon producer.js",
+        "dev:consumer": "nodemon consumer.js",
         "test": "jest --config ./jest.config.json",
         "test:watch": "npm run test -- --watch",
         "lint": "eslint .",

@@ -19,9 +19,8 @@ class ConsumerApp {
      */
   async start() {
     await this.queueManager.connect();
-
-    logger.info('Consumer started');
     await this.consumeManager.startConsuming();
+    logger.info('Consumer started');
   }
 }
 

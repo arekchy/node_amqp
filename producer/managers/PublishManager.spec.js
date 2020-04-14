@@ -34,7 +34,6 @@ describe('PublishManager', () => {
   });
 
   describe('calculateIntervalForFrequency', () => {
-
     it('for 1Hz should be 1000 [ms]', () => {
       expect(manager.calculateIntervalForFrequency(1)).toBe(1000);
     });
@@ -45,10 +44,9 @@ describe('PublishManager', () => {
 
     it('for 0Hz should throw Error', () => {
       expect(() => {
-        manager.calculateIntervalForFrequency(0)
-      }).toThrow('Frequency has to be positive number')
+        manager.calculateIntervalForFrequency(0);
+      }).toThrow('Frequency has to be positive number');
     });
-
   });
 
   describe('startPublishing', () => {
@@ -57,7 +55,7 @@ describe('PublishManager', () => {
         return {
           type: AmqpMessageType.QUEUE,
           msg: '',
-        }
+        };
       });
 
       jest.useFakeTimers();
@@ -113,6 +111,5 @@ describe('PublishManager', () => {
 
       expect(topicPublisherService.publish).toBeCalledWith(input);
     });
-
   });
 });

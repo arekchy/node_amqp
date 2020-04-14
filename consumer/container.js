@@ -5,6 +5,7 @@ const config = require('../config');
 const QueueManager = require('../managers/QueueManager');
 const ConsumerApp = require('./ConsumerApp');
 const ConsumeManager = require('./managers/ConsumeManager');
+const QueueConsumerService = require('./services/QueueConsumerService');
 
 const setupContainer = () => {
   const container = awilix.createContainer();
@@ -23,7 +24,12 @@ const setupContainer = () => {
 
   // SERVICES
   container.register({
-
+    queueConsumerService: awilix.asFunction(({queueManager}) => {
+      return new QueueConsumerService({
+        queueManager,
+        queueName: config.AMQP_TARGETS.QUEUE_NAME,
+      });
+    }),
   });
 
   return container;
