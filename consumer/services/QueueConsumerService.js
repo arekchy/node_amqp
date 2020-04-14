@@ -37,16 +37,24 @@ class QueueConsumerService extends EventEmitter {
    */
   startConsuming() {
     this.channel.consume(this.queueName, (msg) => {
-      if (msg.content) {
-        this.emit(ConsumerServiceEvent.NEW_MESSAGE_EVENT, {
-          content: msg.content.toString(),
-          routingKey: msg.fields.routingKey,
-          exchange: msg.fields.exchange,
-        });
-      }
+      this.handleNewMessage(msg);
     }, {
       noAck: true,
     });
+  }
+
+  /**
+   * Handle new message from queue
+   * @param {*} msg
+   */
+  handleNewMessage(msg) {
+    if (msg.content) {
+      this.emit(ConsumerServiceEvent.NEW_MESSAGE_EVENT, {
+        content: msg.content.toString(),
+        routingKey: msg.fields.routingKey,
+        exchange: msg.fields.exchange,
+      });
+    }
   }
 }
 
