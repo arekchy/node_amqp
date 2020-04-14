@@ -19,19 +19,51 @@ class ConsumeManager {
   constructor({
     logWriterService,
     queueConsumerService,
+    fanoutConsumerService,
+    direct1ConsumerService,
+    direct2ConsumerService,
+    topicConsumerService,
   }) {
     this.queueConsumerService = queueConsumerService;
+    this.fanoutConsumerService = fanoutConsumerService;
+    this.direct1ConsumerService = direct1ConsumerService;
+    this.direct2ConsumerService = direct2ConsumerService;
+    this.topicConsumerService = topicConsumerService;
     this.logWriterService = logWriterService;
   }
 
   /**
    * Starts process of consuming messages from multiple sources
    */
-  startConsuming() {
+  async startConsuming() {
     this.queueConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
       this.logMessage(msg);
     });
     this.queueConsumerService.startConsuming();
+
+    this.fanoutConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
+      this.logMessage(msg);
+    });
+    await this.fanoutConsumerService.init();
+    this.fanoutConsumerService.startConsuming();
+
+    this.direct1ConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
+      this.logMessage(msg);
+    });
+    await this.direct1ConsumerService.init();
+    this.direct1ConsumerService.startConsuming();
+
+    this.direct2ConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
+      this.logMessage(msg);
+    });
+    await this.direct2ConsumerService.init();
+    this.direct2ConsumerService.startConsuming();
+
+    this.topicConsumerService.on(ConsumerServiceEvent.NEW_MESSAGE_EVENT, (msg) => {
+      this.logMessage(msg);
+    });
+    await this.topicConsumerService.init();
+    this.topicConsumerService.startConsuming();
   }
 
 

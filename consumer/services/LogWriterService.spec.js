@@ -9,7 +9,7 @@ describe('LogWriterService', () => {
   });
 
   it('should create writable stream', () => {
-    expect(fs.createWriteStream).toBeCalledWith('consumer.log');
+    expect(fs.createWriteStream).toBeCalledWith('consumer.log', {flags: 'a'});
   });
 
   describe('logToFile', () => {
@@ -25,7 +25,8 @@ describe('LogWriterService', () => {
 
       service.logToFile(msg);
 
-      expect(service.wstream.write).toBeCalledWith(`Content: ${msg.content}, routingKey: ${msg.routingKey}, exchange: ${msg.exchange}\n`)
+      expect(service.wstream.write).toBeCalledWith(
+          `Content: ${msg.content}, routingKey: ${msg.routingKey}, exchange: ${msg.exchange}\n`);
     });
   });
 });
