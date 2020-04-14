@@ -1,4 +1,3 @@
-const QueueManagerEvent = require('../../structures/QueueManagerEvent');
 const ConsumerServiceEvent = require('../structures/ConsumerServiceEvent');
 const EventEmitter = require('events');
 

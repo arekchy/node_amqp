@@ -1,16 +1,16 @@
 const logger = require('winston');
 
 /**
- * ConsumerApp - Consumer index file
+ * ProducerApp - Producer index file
  */
-class ConsumerApp {
+class ProducerApp {
   /**
-     * ConsumerApp constructor
+     * ProducerApp constructor
      * @param {QueueManager} queueManager - AMQP connection manager
      */
-  constructor({queueManager, consumeManager}) {
+  constructor({queueManager, publishManager}) {
     this.queueManager = queueManager;
-    this.consumeManager = consumeManager;
+    this.publishManager = publishManager;
   }
 
   /**
@@ -20,12 +20,13 @@ class ConsumerApp {
   async start() {
     try {
       await this.queueManager.connect();
-      await this.consumeManager.startConsuming();
-    } catch(e) {
+      await this.publishManager.startPublishing();
+    } catch (e) {
       process.exit(1);
     }
-    logger.info('Consumer started');
+
+    logger.info('Producer started');
   }
 }
 
-module.exports = ConsumerApp;
+module.exports = ProducerApp;
