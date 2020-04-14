@@ -6,3 +6,15 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
+
+  producer:
+    build:
+      dockerfile: ./docker/producer.Dockerfile
+      context: .
+    env_file:
+      - env/producer.env
+    volumes:
+      - ".:/usr/app/"
+    depends_on:
+      - amqp
+    command: node producer.js

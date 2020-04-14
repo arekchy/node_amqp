@@ -4,7 +4,7 @@ const setupContainer = require('./container');
 
 const bootstrapProducer = () => {
   dotenv.config({
-    path: './env/producer.env',
+    path: './env/producer.local.env',
   });
 
   const uid = Date.now();
