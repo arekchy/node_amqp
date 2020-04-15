@@ -4,11 +4,11 @@ Example of communication of node services via rabbitmq.
 
 # Before use
 
-Please copy file
-`consumer.env.tmp` and rename it to as `consumer.env`
-`producer.env.tmp` and rename it to as `producer.env`
+Please copy files
+`consumer.env.tmp` and rename it to `consumer.env`
+`producer.env.tmp` and rename it to `producer.env`
 
-And adjust environment variables if needed. 
+And adjust environment variables those files if needed. 
 
 
 ## Run
